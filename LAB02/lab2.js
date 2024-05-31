@@ -63,5 +63,5 @@ prompt.get(schema, (err, result) => {
   }
 
   // Log the game result
-  console.log(gameResult);
+  console.log(gameResult); 
 });
