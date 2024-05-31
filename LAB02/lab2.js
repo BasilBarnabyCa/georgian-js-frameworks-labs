@@ -37,7 +37,6 @@ prompt.get(schema, (err, result) => {
 
   // Get User's selection and convert it to uppercase
   const userSelection = result.userSelection.toUpperCase();
-  console.log(`\nYou chose: ${userSelection}`);
 
   // Generate a random number between 0 and 1
   const randomNumber = Math.random();
@@ -45,6 +44,9 @@ prompt.get(schema, (err, result) => {
   // Ternary operator to determine the computer's choice and display it
   const computerSelection =
     randomNumber < 0.34 ? "ROCK" : randomNumber < 0.67 ? "PAPER" : "SCISSORS";
+
+  // Display the user's and computer's selection
+  console.log(`\nYou chose: ${userSelection}`);
   console.log(`Computer chose: ${computerSelection}\n`);
 
   // Determine the winner
@@ -63,5 +65,5 @@ prompt.get(schema, (err, result) => {
   }
 
   // Log the game result
-  console.log(gameResult); 
+  console.log(gameResult);
 });
