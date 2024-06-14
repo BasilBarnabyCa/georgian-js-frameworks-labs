@@ -5,7 +5,7 @@ body {
 }
 
 #main {
-	padding-top: 8.5em;
+  padding-top: 8.5em;
 }
 
 h1,
@@ -32,14 +32,22 @@ h2 {
 }
 
 .bg-gradient-reversed {
-	background-image: linear-gradient(to right, #800080, #524897);
-	opacity: 0.9;
-  }
+  background-image: linear-gradient(to right, #800080, #524897);
+  opacity: 0.9;
+}
 
 .brand-bg {
   background-color: #524897;
 }
 
 .hover\:bg-brand:hover {
-	background-color: #524897; /* Add this custom class for hover */
-  }
+  background-color: #524897; /* Add this custom class for hover */
+}
+
+.border-brand {
+  border-color: #524897 !important;  /* Replace with your custom color */
+}
+
+.focus\:border-brand:focus {
+  border-color: #524897 !important; /* Replace with your custom color */
+}
