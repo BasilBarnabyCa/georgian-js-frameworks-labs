@@ -51,3 +51,7 @@ h2 {
 .focus\:border-brand:focus {
   border-color: #524897 !important; /* Replace with your custom color */
 }
+
+.footer-bg {
+  background-color: #724199 !important;
+}
