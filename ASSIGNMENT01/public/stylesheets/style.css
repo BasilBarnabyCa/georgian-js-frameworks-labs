@@ -1,5 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Raleway:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Raleway:wght@400;500;600;700&display=swap");
 
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Open Sans", sans-serif;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Raleway", sans-serif;
+}
+
+h1,
+h2 {
+  color: #524897;
+}
+
+.hero {
+  background-image: url("../img/bg-hero.jpg");
+}
+
+.bg-gradient {
+  background-image: linear-gradient(to right, #524897, #800080);
+  opacity: 0.9;
+}
+
+.bg-gradient-reversed {
+	background-image: linear-gradient(to right, #800080, #524897);
+	opacity: 0.9;
+  }
+
+.brand-bg {
+  background-color: #524897;
+}
+
+.hover\:bg-brand:hover {
+	background-color: #524897; /* Add this custom class for hover */
+  }
