@@ -6,12 +6,12 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "It's Basil | Home" });
 });
 
-router.get("/portfolio", function (req, res, next) {
-  res.render("portfolio", { title: "It's Basil | Portfolio" });
+router.get("/projects", function (req, res, next) {
+  res.render("projects", { title: "It's Basil | Projects" });
 });
 
-router.get("/experience", function (req, res, next) {
-  res.render("experience", { title: "It's Basil | Experience" });
+router.get("/about", function (req, res, next) {
+  res.render("about", { title: "It's Basil | About" });
 });
 
 router.get("/contact", function (req, res, next) {
