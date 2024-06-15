@@ -35,7 +35,7 @@ You can view the demo [here](https://basil-assignment-01.onrender.com)
 - Google Fonts for typography (Raleway and Open Sans)
 
 ## Template Used
-[Atom](https://atom.redpixelthemes.com/)
+[Atom, a free Tailwind CSS portfolio template](https://atom.redpixelthemes.com/)
 
 
 ## Setup
@@ -58,4 +58,4 @@ To run this project locally, follow these steps:
    ```bash
    npm start
 
-5. Visit localhost:3000[http://localhost:3000/] to locally view demo content
+5. Visit [localhost:3000](http://localhost:3000/) to locally view demo content
