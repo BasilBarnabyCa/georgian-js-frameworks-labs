@@ -1,0 +1,26 @@
+{
+  "name": "simple-calculator",
+  "version": "1.0.0",
+  "description": "A simple calculator that parses the operators and operands from the URL.",
+  "main": "server.js",
+  "dependencies": {
+    "connect": "^3.7.0",
+    "debug": "^2.6.9",
+    "ee-first": "^1.1.1",
+    "encodeurl": "^1.0.2",
+    "escape-html": "^1.0.3",
+    "finalhandler": "^1.1.2",
+    "ms": "^2.0.0",
+    "on-finished": "^2.3.0",
+    "parseurl": "^1.3.3",
+    "statuses": "^1.5.0",
+    "unpipe": "^1.0.0",
+    "utils-merge": "^1.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Basil Barnaby",
+  "license": "ISC"
+}
