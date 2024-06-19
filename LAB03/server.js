@@ -3,7 +3,7 @@
  * Course: COMP2068 - JavaScript Frameworks
  * Lab: 3
  * Date: June 19, 2024
- * Description: This is a simple calculator that parses the operators and operands from the URL.
+ * Description: This is a simple calculator that parses the operator and operands from the URL.
  */
 
 // Import connect
