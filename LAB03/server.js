@@ -50,7 +50,8 @@ function calculate(req, res, next) {
       break;
     case "divide":
       answer = Number(x) / Number(y);
-      operator = "&divide;";screenTop
+      operator = "&divide;";
+	  break;
     default:
       answer = "Invalid method found!";
       failed = true;
@@ -61,8 +62,41 @@ function calculate(req, res, next) {
   if (failed) {
     output = answer;
   } else {
-    output = `${x} ${operator} ${y} ${equals} ${answer}`;
+    output = `${x} <span class="operator">${operator}</span> ${y} <span class="answer">${equals} ${answer}</span>`;
   }
+
+  // Set the response header and write the output to the screen
+  res.writeHead(200, { "Content-Type": "text/html" });
+  res.write(`
+    <html>
+      <head>
+	  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+          body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+			font-family: 'Roboto Mono', monospace;
+          }
+          h1 {
+			font-size: 5rem;
+          }
+		 .answer {
+		    color: #10b981;
+		  }
+		  .operator {
+			color: #8b5cf6;
+		  },
+        </style>
+      </head>
+      <body>
+        <h1>${output}</h1>
+      </body>
+    </html>
+  `);
+  res.end();
 }
 
 app.use("/", calculate);
