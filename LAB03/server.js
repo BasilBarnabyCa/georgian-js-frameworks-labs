@@ -53,7 +53,7 @@ function calculate(req, res, next) {
       operator = "&divide;";
 	  break;
     default:
-      answer = "Invalid method found!";
+      answer = "Invalid <span class='error'>method</span> found!";
       failed = true;
       break;
   }
@@ -62,6 +62,7 @@ function calculate(req, res, next) {
   if (failed) {
     output = answer;
   } else {
+	answer = Math.round(answer * 1000000) / 1000000;
     output = `${x} <span class="operator">${operator}</span> ${y} <span class="answer">${equals} ${answer}</span>`;
   }
 
@@ -88,6 +89,9 @@ function calculate(req, res, next) {
 		  }
 		  .operator {
 			color: #8b5cf6;
+		  },
+		  .error {
+			color: #ef4444;
 		  },
         </style>
       </head>
