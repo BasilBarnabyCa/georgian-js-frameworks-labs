@@ -31,8 +31,8 @@ function calculate(req, res, next) {
   let operator = "";
   let output = "";
   let equals = "&equals;";
-  let failed = false;
   let answer = 0;
+  let failed = false;
 
   // Control statement to determine the method to use
   switch (method) {
