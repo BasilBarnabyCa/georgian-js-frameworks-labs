@@ -89,10 +89,10 @@ function calculate(req, res, next) {
 		  }
 		  .operator {
 			color: #8b5cf6;
-		  },
+		  }
 		  .error {
 			color: #ef4444;
-		  },
+		  }
         </style>
       </head>
       <body>
