@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 var mainLayout = "layouts/main";
-var authLayout = "layouts/auth";
 
 /* GET home page. */
 router.get("/dashboard", function (req, res, next) {
@@ -9,11 +8,7 @@ router.get("/dashboard", function (req, res, next) {
 });
 
 router.get("/airlines", function (req, res, next) {
-  res.render("airlines", { title: "Airlines", breadcrumbs: "Admin", layout: mainLayout });
-});
-
-router.get("/login", function (req, res, next) {
-  res.render("login", { title: "Authenticate", layout: authLayout });
+  res.render("admin/airlines", { title: "Airlines", breadcrumbs: "Admin", layout: mainLayout });
 });
 
 module.exports = router;
