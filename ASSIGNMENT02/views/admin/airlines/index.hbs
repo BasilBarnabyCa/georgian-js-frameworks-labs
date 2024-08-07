@@ -1,0 +1,81 @@
+<div class="flex flex-wrap -mx-3">
+	<div class="flex-none w-full max-w-full px-3">
+		<div
+			class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
+			<div
+				class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent flex justify-between items-center">
+				<h6>{{{title}}}</h6>
+				<a class="px-6 py-3 my-4 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-purple-700 to-pink-500 hover:shadow-soft-2xl hover:scale-102"
+					href="/admin/airlines/add">Add {{{props.type}}}</a>
+			</div>
+			<div class="flex-auto px-0 pt-0 pb-2">
+				<div class="p-0 overflow-x-auto">
+					<table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
+						<thead class="align-bottom">
+							<tr>
+								<th
+									class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+									Name</th>
+								<th
+									class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+									IATA</th>
+								<th
+									class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+									ICAO</th>
+								<th
+									class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+									Created At</th>
+								<th
+									class="px-6  py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none tracking-none whitespace-nowrap text-slate-400 opacity-70 text-right">
+									Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each dataset}}
+							<tr>
+								<td
+									class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+									<div class="flex px-2 py-1">
+										<div>
+											<img src="../assets/img/team-2.jpg"
+												class="inline-flex items-center justify-center mr-4 text-sm text-white transition-all duration-200 ease-soft-in-out h-9 w-9 rounded-xl"
+												alt="user1" />
+										</div>
+										<div class="flex flex-col justify-center">
+											<h6 class="mb-0 text-sm leading-normal">{{this.name}}</h6>
+										</div>
+									</div>
+								</td>
+								<td
+									class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+									<p class="mb-0 text-xs font-semibold leading-tight">{{this.iata}}</p>
+								</td>
+								<td
+									class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+									<p class="mb-0 text-xs font-semibold leading-tight">{{this.icao}}</p>
+								</td>
+								<td
+									class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+									<span class="text-xs font-semibold leading-tight text-slate-400">{{ toShortDate
+										this.createDate }}</span>
+								</td>
+								<td
+									class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+									<div class="flex justify-end px-6 space-x-6">
+										<a href="/admin/airlines/edit/{{this._id}}"
+											class="text-xs font-semibold leading-tight text-yellow-500 justify-self-end">
+											<i class="fa-regular fa-pen-to-square fa-lg"></i> </a>
+										<a href="/admin/airlines/delete/{{this._id}}" onclick="return confirmDeletion()"
+											class="text-xs font-semibold leading-tight text-red-400 justify-self-end">
+											<i class="fa-solid fa-trash fa-lg"></i> </a>
+									</div>
+								</td>
+							</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

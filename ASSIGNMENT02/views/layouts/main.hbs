@@ -13,19 +13,24 @@
     <!-- Nucleo Icons -->
     <link href="/stylesheets/nucleo-icons.css" rel="stylesheet" />
     <link href="/stylesheets/nucleo-svg.css" rel="stylesheet" />
-    <!-- Template Styling -->
+    
+	<!-- Template Styling -->
     <link
       href="/stylesheets/soft-ui-dashboard-tailwind.css?v=1.0.5"
       rel="stylesheet"
     />
 
+    <link
+      href="/stylesheets/style.css"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- Popper -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <!-- Font Awesome Icons -->
-    <script
-      src="https://kit.fontawesome.com/42d5adcbca.js"
-      crossorigin="anonymous"
-    ></script>
+   <script src="https://kit.fontawesome.com/98315ef4dc.js" crossorigin="anonymous"></script>
   </head>
 
   <body
@@ -1023,14 +1028,10 @@
                 <a
                   class="opacity-50 text-slate-700"
                   href="javascript:;"
-                >{{{breadcrumbs}}}</a>
+                >{{{props.breadcrumbs}}}</a>
               </li>
-              <li
-                class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']"
-                aria-current="page"
-              >{{{title}}}</li>
             </ol>
-            <h6 class="mb-0 font-bold capitalize">{{{title}}}</h6>
+            <h6 class="mb-0 font-bold capitalize text-2xl">{{{title}}}</h6>
           </nav>
 
           <div
@@ -1266,4 +1267,5 @@
     src="/javascripts/soft-ui-dashboard-tailwind.js?v=1.0.5"
     async
   ></script>
+  <script src="/javascripts/scripts.js"></script>
 </html>
