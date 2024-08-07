@@ -2,63 +2,63 @@ var express = require("express");
 var router = express.Router();
 var mainLayout = "layouts/main"; // Dashboard layout
 
-const Airline = require("../../models/airline");
+const Airport = require("../../models/airport");
 
 // Define the props object
 const props = {
-	type: "Airline",
+	type: "Airport",
 	breadcrumbs: "Admin",
-	url: "admin/airlines"
+	url: "admin/airports"
 };
 
-/* GET /admin/airlines */
+/* GET /admin/airports */
 router.get("/", async (req, res, next) => {
 	try {
-		let airlines = await Airline.find().sort([["name", "ascending"]]);
-		res.render(`${props.url}/index`, { layout: mainLayout, title: "Airlines", props: props, dataset: airlines });
+		let airports = await Airport.find().sort([["name", "ascending"]]);
+		res.render(`${props.url}/index`, { layout: mainLayout, title: "Airports", props: props, dataset: airports });
 	} catch (error) {
 		next(error);
 	}
 });
 
-/* SHOW /admin/airlines/add */
+/* SHOW /admin/airports/add */
 router.get("/add", (req, res, next) => {
-	res.render(`${props.url}/add`, { layout: mainLayout, title: "Add Airlines", props: props });
+	res.render(`${props.url}/add`, { layout: mainLayout, title: "Add Airport", props: props });
 });
 
-/* POST /admin/airlines/add */
+/* POST /admin/airports/add */
 router.post("/add", async (req, res, next) => {
 	try {
-		let newAirline = new Airline({
+		let newAirport = new Airport({
 			name: req.body.name,
 			iata: req.body.iata,
 			icao: req.body.icao,
 			createDate: new Date()
 		});
-		await newAirline.save();
+		await newAirport.save();
 		res.redirect(`/${props.url}`);
 	} catch (error) {
 		next(error);
 	}
 });
 
-/* SHOW /admin/airlines/edit/:_id */
+/* SHOW /admin/airports/edit/:_id */
 router.get("/edit/:_id", async (req, res, next) => {
 	try {
-		let airlineId = req.params._id;
-		let airlineData = await Airline.findById(airlineId);
-		res.render(`${props.url}/edit`, { layout: mainLayout, title: "Edit Airlines", props: props, airline: airlineData });
+		let airportId = req.params._id;
+		let airportData = await Airport.findById(airportId);
+		res.render(`${props.url}/edit`, { layout: mainLayout, title: "Edit Airport", props: props, airport: airportData });
 	} catch (error) {
 		next(error);
 	}
 });
 
-/* UPDATE /admin/airlines/edit/:_id */
+/* UPDATE /admin/airports/edit/:_id */
 router.post("/edit/:_id", async (req, res, next) => {
 	try {
-		let airlineId = req.params._id;
-		await Airline.findByIdAndUpdate(
-			airlineId,
+		let airportId = req.params._id;
+		await Airport.findByIdAndUpdate(
+			airportId,
 			{
 				name: req.body.name,
 				iata: req.body.iata,
@@ -71,11 +71,11 @@ router.post("/edit/:_id", async (req, res, next) => {
 	}
 });
 
-/* DELETE /admin/airlines/delete/:_id */
+/* DELETE /admin/airports/delete/:_id */
 router.get('/delete/:_id', async (req, res, next) => {
 	try {
-		let airlineId = req.params._id;
-		await Airline.deleteOne({ _id: airlineId });
+		let airportId = req.params._id;
+		await Airport.deleteOne({ _id: airportId });
 		res.redirect(`/${props.url}`);
 	} catch (error) {
 		next(error);

@@ -11,4 +11,8 @@ router.get("/dashboard", function (req, res, next) {
 var airlinesRouter = require("./airportAdminRoutes/airlines");
 router.use("/airlines", airlinesRouter);
 
+/* Admin Airport Routes */
+var airportsRouter = require("./airportAdminRoutes/airports");
+router.use("/airports", airportsRouter);
+
 module.exports = router;
