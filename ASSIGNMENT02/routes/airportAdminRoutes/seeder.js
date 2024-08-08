@@ -152,6 +152,7 @@ const generateRandomTime = (baseTime) => {
   return new Date(baseTime.getTime() + randomOffset * 60000); // Offset in milliseconds
 };
 
+// TODO: FIX arrival date to be after departure date
 const generateFlights = (numFlights) => {
   const flights = [];
   const baseTime = new Date();
@@ -195,10 +196,17 @@ const generateFlights = (numFlights) => {
       arrivalTime,
       gate: gateDataset[gateIndex].name,
       carousel,
-      status: "Scheduled",
+      status: getRandomStatus(),
     });
   }
 
   return flights;
 };
+
+const getRandomStatus = () => {
+	let statusArray = ["Scheduled", "On-time", "Cancelled", "Delayed"];
+	return statusArray[Math.floor(Math.random() * statusArray.length)];
+}
+
+
 module.exports = router;

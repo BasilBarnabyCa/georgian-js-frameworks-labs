@@ -10,6 +10,20 @@ const formatTime12Hour = (date) => {
 	return new Date(date).toLocaleTimeString('en-CA', options).replace(/^0+/, '').toUpperCase();
 };
 
+const getStatusClass = (status) => {
+	switch (status) {
+		case 'On-time':
+			return 'bg-gradient-to-tl from-green-600 to-lime-400';
+		case 'Scheduled':
+			return 'bg-gradient-to-tl from-blue-600 to-blue-400';
+		case 'Cancelled':
+			return 'bg-gradient-to-tl from-red-600 to-red-400';
+		default:
+			return 'bg-gradient-to-tl from-gray-600 to-gray-400';
+	}
+};
+
+
 
 const getHelpers = () => {
 	hbs.registerHelper("toShortDate", (longDateValue) => {
@@ -22,6 +36,10 @@ const getHelpers = () => {
 
 	hbs.registerHelper("toTime12Hour", (date) => {
 		return new hbs.SafeString(formatTime12Hour(date));
+	});
+
+	hbs.registerHelper("getStatusClass", (status) => {
+		return new hbs.SafeString(getStatusClass(status));
 	});
 };
 
