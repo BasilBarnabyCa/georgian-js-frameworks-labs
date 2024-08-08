@@ -12,6 +12,10 @@ const dataSchemaObject = {
 		type: String,
 		required: true,
 	},
+	city: {
+		type: String,
+		required: true,
+	},
 	logo: {
 		type: String
 	}

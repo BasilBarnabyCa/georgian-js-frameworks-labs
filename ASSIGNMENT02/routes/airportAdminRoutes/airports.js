@@ -31,6 +31,7 @@ router.post("/add", async (req, res, next) => {
 	try {
 		let newAirport = new Airport({
 			name: req.body.name,
+			city: req.body.city,
 			iata: req.body.iata,
 			icao: req.body.icao,
 			createDate: new Date()
@@ -61,6 +62,7 @@ router.post("/edit/:_id", async (req, res, next) => {
 			airportId,
 			{
 				name: req.body.name,
+				city: req.body.city,
 				iata: req.body.iata,
 				icao: req.body.icao
 			}

@@ -5,11 +5,23 @@ const dataSchemaObject = {
 		required: true,
 		unique: true
 	},
-	departureAirport: {
+	airline: {
 		type: String,
 		required: true
 	},
-	arrivalAirport: {
+	originAirport: {
+		type: String,
+		required: true
+	},
+	originCity: {
+		type: String,
+		required: true
+	},
+	destinationAirport: {
+		type: String,
+		required: true
+	},
+	destinationCity: {
 		type: String,
 		required: true
 	},
@@ -21,17 +33,17 @@ const dataSchemaObject = {
 		type: Date,
 		required: true
 	},
-	airline: {
+	gate: {
 		type: String,
 		required: true
 	},
-	aircraftModel: {
+	carousel: {
 		type: String,
 		required: true
 	},
 	status: {
 		type: String,
-		enum: ['Scheduled', 'Departed', 'Landed', 'Cancelled'],
+		// enum: ['Scheduled', 'Departed', 'Landed', 'Cancelled'],
 		default: 'Scheduled'
 	}
 };
