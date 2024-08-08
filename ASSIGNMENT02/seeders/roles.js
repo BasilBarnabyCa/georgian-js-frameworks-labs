@@ -1,7 +1,7 @@
 const roles = [
-  { name: "admin", description: "Airport administrators" },
-  { name: "agent", description: "Airline agents" },
-  { name: "user", description: "Customers and passengers" },
+  { name: "Admin", description: "Airport administrators" },
+  { name: "Agent", description: "Airline agents" },
+  { name: "User", description: "Customers and passengers" },
 ];
 
 module.exports = roles;

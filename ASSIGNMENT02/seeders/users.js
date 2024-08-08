@@ -7,7 +7,7 @@ const hashPasswords = async (airlines) => {
     const hashedAirlines = await Promise.all(
         airlines.map(async (airline) => {
             const hashedPassword = await bcrypt.hash(airline.iata, saltRounds);
-            return { name: airline.name, username: airline.iata, password: hashedPassword, role: "agent" };
+            return { name: airline.name, email: `agent@${airline.iata.toLowerCase()}.com`, username: airline.iata, password: hashedPassword, role: "Agent" };
         })
     );
     return hashedAirlines;
@@ -16,8 +16,8 @@ const hashPasswords = async (airlines) => {
 const generateUsers = async () => {
     try {
         const users = [
-            { name: "Administrator", username: "admin@email.com", password: await bcrypt.hash("admin", saltRounds), role: "admin" },
-            { name: "John Doe", username: "user@email.com", password: await bcrypt.hash("user", saltRounds), role: "user" }
+            { name: "Administrator", username: "admin", email: "admin@email.com", password: await bcrypt.hash("admin", saltRounds), role: "Admin" },
+            { name: "John Doe", username: "user", email: "user@email.com", password: await bcrypt.hash("user", saltRounds), role: "User" }
         ];
         const airlineUsers = await hashPasswords(airlineDataset);
         return users.concat(airlineUsers);

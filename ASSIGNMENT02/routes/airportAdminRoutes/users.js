@@ -4,7 +4,7 @@ var mainLayout = "layouts/main"; // Dashboard layout
 
 const User = require("../../models/user");
 // const e = require("express");
-const role = require("../../models/role");
+const Role = require("../../models/role");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
@@ -18,7 +18,7 @@ const props = {
 /* GET /admin/users/admins */
 router.get("/admins", async (req, res, next) => {
   try {
-    let admins = await User.find({ role: "admin" }).sort([
+    let admins = await User.find({ role: "Admin" }).sort([
       ["name", "ascending"],
     ]);
     res.render(`${props.url}/admins`, {
@@ -35,7 +35,7 @@ router.get("/admins", async (req, res, next) => {
 /* GET /admin/users/agents */
 router.get("/agents", async (req, res, next) => {
   try {
-    let agents = await User.find({ role: "agent" }).sort([
+    let agents = await User.find({ role: "Agent" }).sort([
       ["name", "ascending"],
     ]);
     res.render(`${props.url}/agents`, {
@@ -52,9 +52,7 @@ router.get("/agents", async (req, res, next) => {
 /* GET /admin/users/users */
 router.get("/users", async (req, res, next) => {
   try {
-    let users = await User.find({ role: "user" }).sort([
-      ["name", "ascending"],
-    ]);
+    let users = await User.find({ role: "User" }).sort([["name", "ascending"]]);
     res.render(`${props.url}/users`, {
       layout: mainLayout,
       title: "Users",
@@ -67,11 +65,15 @@ router.get("/users", async (req, res, next) => {
 });
 
 /* SHOW /admin/users/add */
-router.get("/add", (req, res, next) => {
+router.get("/add", async (req, res, next) => {
+  let roleList = await Role.find({ name: { $in: ["Admin", "Agent"] } }).sort([
+    ["name", "ascending"],
+  ]);
   res.render(`${props.url}/add`, {
     layout: mainLayout,
     title: "Add User",
     props: props,
+	roles: roleList
   });
 });
 
@@ -82,7 +84,7 @@ router.post("/add", async (req, res, next) => {
       name: req.body.name,
       email: req.body.email,
       username: req.body.username,
-      password: bcrypt.hash(req.body.password, saltRounds),
+      password: await bcrypt.hash(req.body.password, saltRounds),
       role: req.body.role,
     });
     await newUser.save();
