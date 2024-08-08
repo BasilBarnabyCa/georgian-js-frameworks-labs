@@ -8,6 +8,10 @@ const dataSchemaObject = {
 		type: String,
 		required: true
 	},
+	movementType: {
+		type: String,
+		required: true
+	},
 	originAirport: {
 		type: String,
 		required: true
@@ -37,8 +41,7 @@ const dataSchemaObject = {
 		required: true
 	},
 	carousel: {
-		type: String,
-		required: true
+		type: String
 	},
 	status: {
 		type: String,
