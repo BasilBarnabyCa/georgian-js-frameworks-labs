@@ -15,4 +15,12 @@ router.use("/airlines", airlinesRouter);
 var airportsRouter = require("./airportAdminRoutes/airports");
 router.use("/airports", airportsRouter);
 
+/* Admin Flight Routes */
+var flightsRouter = require("./airportAdminRoutes/flights");
+router.use("/flights", flightsRouter);
+
+/* Admin Seeder Routes */
+var seederRouter = require("./airportAdminRoutes/seeder");
+router.use("/seeders", seederRouter);
+
 module.exports = router;
