@@ -6,7 +6,7 @@ var logger = require('morgan');
 var config = require('./config/globals');
 var mongoose = require('mongoose');
 var hbs = require("hbs");
-var helpers = require("./helpers/helpers");
+var dateHelpers = require("./helpers/dateHelpers");
 
 // Route Declarations
 var adminRouter = require('./routes/admin');
@@ -37,7 +37,7 @@ app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
 
 // Helpers
-helpers.registerHelpers();
+dateHelpers.getHelpers();
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
