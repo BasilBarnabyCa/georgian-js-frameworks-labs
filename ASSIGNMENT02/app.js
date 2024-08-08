@@ -6,6 +6,7 @@ var logger = require('morgan');
 var config = require('./config/globals');
 var mongoose = require('mongoose');
 var hbs = require("hbs");
+var helpers = require("./helpers/helpers");
 
 // Route Declarations
 var adminRouter = require('./routes/admin');
@@ -36,9 +37,7 @@ app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
 
 // Helpers
-hbs.registerHelper("toShortDate", (longDateValue) => {
-	return new hbs.SafeString(longDateValue.toLocaleDateString("en-CA"));
-});
+helpers.registerHelpers();
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
