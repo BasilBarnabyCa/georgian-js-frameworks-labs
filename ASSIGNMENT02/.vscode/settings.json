@@ -1,0 +1,4 @@
+{
+	"appService.defaultWebAppToDeploy": "undefined/subscriptions/bc09f3c9-dd4d-4b8f-b74e-4ada195c5992/resourceGroups/rg-flightdeck/providers/Microsoft.Web/sites/flightdeck-web-app",
+	"appService.deploySubpath": "."
+}
