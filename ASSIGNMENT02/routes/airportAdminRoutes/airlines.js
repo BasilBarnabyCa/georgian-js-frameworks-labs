@@ -23,7 +23,7 @@ router.get("/", async (req, res, next) => {
 
 /* SHOW /admin/airlines/add */
 router.get("/add", (req, res, next) => {
-	res.render(`${props.url}/add`, { layout: mainLayout, title: "Add Airlines", props: props });
+	res.render(`${props.url}/add`, { layout: mainLayout, title: "Add Airline", props: props });
 });
 
 /* POST /admin/airlines/add */
@@ -47,7 +47,7 @@ router.get("/edit/:_id", async (req, res, next) => {
 	try {
 		let airlineId = req.params._id;
 		let airlineData = await Airline.findById(airlineId);
-		res.render(`${props.url}/edit`, { layout: mainLayout, title: "Edit Airlines", props: props, airline: airlineData });
+		res.render(`${props.url}/edit`, { layout: mainLayout, title: "Edit Airline", props: props, airline: airlineData });
 	} catch (error) {
 		next(error);
 	}

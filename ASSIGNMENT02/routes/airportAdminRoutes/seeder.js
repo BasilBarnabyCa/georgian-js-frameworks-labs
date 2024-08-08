@@ -18,6 +18,12 @@ const CheckInCounter = require("../../models/checkInCounter");
 
 const Flight = require("../../models/flight");
 
+const Role = require("../../models/role");
+const roleDataSet = require("../../seeders/roles");
+
+const User = require("../../models/user");
+const generateUsers = require("../../seeders/users");
+
 // Define the props object
 const props = {
   type: "Seeder",
@@ -30,6 +36,7 @@ const props = {
     carousels: "carousels",
     checkInCounters: "check-in-counters",
     flights: "flights",
+	accessControl: "access-control",
   },
 };
 
@@ -49,12 +56,8 @@ router.get("/", async (req, res, next) => {
 /* Seed the database with airports */
 router.get("/seed-airports", async (req, res, next) => {
   try {
-    // Clear the existing collection
     await Airport.deleteMany({});
-
-    // Insert the new data
     await Airport.insertMany(airportDataset);
-
     res.redirect(`/${props.url}`);
   } catch (error) {
     next(error);
@@ -64,12 +67,8 @@ router.get("/seed-airports", async (req, res, next) => {
 /* Seed the database with airlines */
 router.get("/seed-airlines", async (req, res, next) => {
   try {
-    // Clear the existing collection
     await Airline.deleteMany({});
-
-    // Insert the new data
     await Airline.insertMany(airlineDataset);
-
     res.redirect(`/${props.url}`);
   } catch (error) {
     next(error);
@@ -78,12 +77,8 @@ router.get("/seed-airlines", async (req, res, next) => {
 
 router.get("/seed-gates", async (req, res, next) => {
   try {
-    // Clear the existing collection
     await Gate.deleteMany({});
-
-    // Insert the new data
     await Gate.insertMany(gateDataset);
-
     res.redirect(`/${props.url}`);
   } catch (error) {
     next(error);
@@ -92,12 +87,8 @@ router.get("/seed-gates", async (req, res, next) => {
 
 router.get("/seed-carousels", async (req, res, next) => {
   try {
-    // Clear the existing collection
     await Carousel.deleteMany({});
-
-    // Insert the new data
     await Carousel.insertMany(carouselDataset);
-
     res.redirect(`/${props.url}`);
   } catch (error) {
     next(error);
@@ -106,13 +97,9 @@ router.get("/seed-carousels", async (req, res, next) => {
 
 router.get("/seed-check-in-counters", async (req, res, next) => {
   try {
-    // Clear the existing collection
     await CheckInCounter.deleteMany({});
-
-    // Insert the new data
     const checkInCounters = generateCheckInCounters(100);
     await CheckInCounter.insertMany(checkInCounters);
-
     res.redirect(`/${props.url}`);
   } catch (error) {
     next(error);
@@ -134,13 +121,9 @@ const generateCheckInCounters = (numCounters) => {
 
 router.get("/seed-flights", async (req, res, next) => {
   try {
-    // Clear the existing collection
     await Flight.deleteMany({});
-
-    // Insert the new data
     const flights = generateFlights(20);
     await Flight.insertMany(flights);
-
     res.redirect(`/${props.url}`);
   } catch (error) {
     next(error);
@@ -175,11 +158,11 @@ const generateFlights = (numFlights) => {
     const movementTypeIndex = Math.floor(Math.random() * movementType.length);
 
     if (movementType[movementTypeIndex] !== "Departure") {
-		const carouselIndex = Math.floor(Math.random() * carouselDataset.length);
-		carousel = carouselDataset[carouselIndex].name;
+      const carouselIndex = Math.floor(Math.random() * carouselDataset.length);
+      carousel = carouselDataset[carouselIndex].name;
     }
-	
-	const gateIndex = Math.floor(Math.random() * gateDataset.length);
+
+    const gateIndex = Math.floor(Math.random() * gateDataset.length);
 
     const departureTime = generateRandomTime(baseTime);
     const arrivalTime = generateRandomTime(departureTime);
@@ -204,9 +187,22 @@ const generateFlights = (numFlights) => {
 };
 
 const getRandomStatus = () => {
-	let statusArray = ["Scheduled", "On-time", "Cancelled", "Delayed"];
-	return statusArray[Math.floor(Math.random() * statusArray.length)];
-}
+  let statusArray = ["Scheduled", "On-time", "Cancelled", "Delayed"];
+  return statusArray[Math.floor(Math.random() * statusArray.length)];
+};
 
+router.get("/seed-access-control", async (req, res, next) => {
+  try {
+    await Role.deleteMany({});
+    await Role.insertMany(roleDataSet);
+
+    await User.deleteMany({});
+    const users = await generateUsers();
+    await User.insertMany(users);
+    res.redirect(`/${props.url}`);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;

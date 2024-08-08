@@ -7,6 +7,13 @@ router.get("/dashboard", function (req, res, next) {
   res.render("index", { title: "Dashboard", breadcrumbs: "Home", layout: mainLayout });
 });
 
+/* Access Control Routes */
+var rolesRouter = require("./airportAdminRoutes/roles");
+router.use("/roles", rolesRouter);
+
+var usersRouter = require("./airportAdminRoutes/users");
+router.use("/users", usersRouter);
+
 /* Admin Airline Routes */
 var airlinesRouter = require("./airportAdminRoutes/airlines");
 router.use("/airlines", airlinesRouter);
