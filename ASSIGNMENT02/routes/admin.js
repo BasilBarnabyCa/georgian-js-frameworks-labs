@@ -19,6 +19,18 @@ router.use("/airports", airportsRouter);
 var flightsRouter = require("./airportAdminRoutes/flights");
 router.use("/flights", flightsRouter);
 
+/* Admin Carousel Routes */
+var carouselsRouter = require("./airportAdminRoutes/carousels");
+router.use("/carousels", carouselsRouter);
+
+/* Admin Gate Routes */
+var gatesRouter = require("./airportAdminRoutes/gates");
+router.use("/gates", gatesRouter);
+
+/* Admin Check-In Counter Routes */
+var checkInCountersRouter = require("./airportAdminRoutes/checkInCounters");
+router.use("/check-in-counters", checkInCountersRouter);
+
 /* Admin Seeder Routes */
 var seederRouter = require("./airportAdminRoutes/seeder");
 router.use("/seeders", seederRouter);

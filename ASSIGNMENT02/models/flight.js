@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 const dataSchemaObject = {
 	flightNumber: {
 		type: String,
-		required: true,
-		unique: true
+		required: true
 	},
 	airline: {
 		type: String,
