@@ -3,7 +3,6 @@ var router = express.Router();
 var mainLayout = "layouts/main"; // Dashboard layout
 
 const User = require("../../models/user");
-// const e = require("express");
 const Role = require("../../models/role");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -11,49 +10,18 @@ const saltRounds = 10;
 // Define the props object
 const props = {
   type: "User",
-  breadcrumbs: "Admin / Users",
+  breadcrumbs: "Admin / Access Control",
   url: "admin/users",
 };
 
-/* GET /admin/users/admins */
-router.get("/admins", async (req, res, next) => {
+/* GET /admin/users */
+router.get("/", async (req, res, next) => {
   try {
-    let admins = await User.find({ role: "Admin" }).sort([
-      ["name", "ascending"],
+    let users = await User.find({ role: { $in: ["Admin", "Agent"] } }).sort([
+      ["role", "ascending"],
     ]);
-    res.render(`${props.url}/admins`, {
-      layout: mainLayout,
-      title: "Administrators",
-      props: props,
-      dataset: admins,
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-
-/* GET /admin/users/agents */
-router.get("/agents", async (req, res, next) => {
-  try {
-    let agents = await User.find({ role: "Agent" }).sort([
-      ["name", "ascending"],
-    ]);
-    res.render(`${props.url}/agents`, {
-      layout: mainLayout,
-      title: "Agents",
-      props: props,
-      dataset: agents,
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-
-/* GET /admin/users/users */
-router.get("/users", async (req, res, next) => {
-  try {
-    let users = await User.find({ role: "User" }).sort([["name", "ascending"]]);
-    res.render(`${props.url}/users`, {
+	console.log(users);
+    res.render(`${props.url}/index`, {
       layout: mainLayout,
       title: "Users",
       props: props,

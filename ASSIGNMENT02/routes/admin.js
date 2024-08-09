@@ -14,6 +14,9 @@ router.use("/roles", rolesRouter);
 var usersRouter = require("./airportAdminRoutes/users");
 router.use("/users", usersRouter);
 
+var subscribersRouter = require("./airportAdminRoutes/subscribers");
+router.use("/subscribers", subscribersRouter);
+
 /* Admin Airline Routes */
 var airlinesRouter = require("./airportAdminRoutes/airlines");
 router.use("/airlines", airlinesRouter);

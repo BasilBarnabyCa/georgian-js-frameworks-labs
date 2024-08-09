@@ -33,6 +33,17 @@ const getStatusClass = (status) => {
   }
 };
 
+const getRoleClass = (role) => {
+  switch (role) {
+    case "Admin":
+      return "bg-gradient-to-tl from-gray-600 to-gray-400";
+    case "Agent":
+      return "bg-gradient-to-tl from-blue-600 to-blue-400";
+    default:
+      return "bg-gradient-to-tl from-gray-600 to-gray-400";
+  }
+};
+
 const getHelpers = () => {
   hbs.registerHelper("toShortDate", (longDateValue) => {
     return new hbs.SafeString(longDateValue.toLocaleDateString("en-CA"));
@@ -48,6 +59,10 @@ const getHelpers = () => {
 
   hbs.registerHelper("getStatusClass", (status) => {
     return new hbs.SafeString(getStatusClass(status));
+  });
+  
+  hbs.registerHelper("getRoleClass", (role) => {
+    return new hbs.SafeString(getRoleClass(role));
   });
 
   hbs.registerHelper("incrementedIndex", function (index) {
