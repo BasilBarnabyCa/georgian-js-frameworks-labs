@@ -51,7 +51,6 @@ router.post("/add", async (req, res, next) => {
     let newUser = new User({
       name: req.body.name,
       email: req.body.email,
-      username: req.body.username,
       password: await bcrypt.hash(req.body.password, saltRounds),
       role: req.body.role,
     });
@@ -85,7 +84,6 @@ router.post("/edit/:_id", async (req, res, next) => {
     await User.findByIdAndUpdate(userId, {
       name: req.body.name,
       email: req.body.email,
-      username: req.body.username,
       password: bcrypt.hash(req.body.password, saltRounds),
       role: req.body.role,
     });

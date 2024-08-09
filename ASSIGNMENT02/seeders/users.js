@@ -1,53 +1,51 @@
-const bcrypt = require('bcrypt');
+const mongoose = require("mongoose");
+const User = require("../models/user");
 const { faker } = require('@faker-js/faker');
 const airlineDataset = require('./airlines');
 
-const saltRounds = 10;
-
-const hashPasswords = async (airlines) => {
-    const hashedAirlines = await Promise.all(
-        airlines.map(async (airline) => {
-            const hashedPassword = await bcrypt.hash(airline.iata, saltRounds);
-            return { name: airline.name, email: `agent@${airline.iata.toLowerCase()}.com`, username: airline.iata, password: hashedPassword, role: "Agent" };
-        })
-    );
-    return hashedAirlines;
-};
-
 const generateUsers = async () => {
     try {
-        const users = [
-            { name: "Administrator", username: "admin", email: "admin@email.com", password: await bcrypt.hash("admin", saltRounds), role: "Admin" },
-            { name: "John Doe", username: "user", email: "user@email.com", password: await bcrypt.hash("user", saltRounds), role: "User" }
-        ];
-        const airlineUsers = await hashPasswords(airlineDataset);
-		const subscriberUsers = await generateSubscribers();
-        return users.concat(airlineUsers, subscriberUsers);
-    } catch (error) {
-        console.error(error);
-        return [];
-    }
-};
+		await User.deleteMany({});
+		
+        // Initialize an array to store users
+        const users = [];
 
-const generateSubscribers = async () => {
-    try {
-        const subscribers = [];
-        for (let i = 1; i <= 20; i++) {
-            let subscriber = {
-                name: `${faker.person.firstName()} ${faker.person.lastName()}`,
-                username: faker.internet.userName(),
-                email: faker.internet.email(),
-                password: await bcrypt.hash("password", saltRounds),
-                role: "Subscriber"
-            };
-            subscribers.push(subscriber);
+        // Register admin and regular user
+        users.push(await User.register(new User({
+            name: "Administrator",
+            email: "admin@email.com",
+            role: "Admin"
+        }), "admin"));
+
+        users.push(await User.register(new User({
+            name: "John Doe",
+            email: "user@email.com",
+            role: "User"
+        }), "user"));
+
+        // Register airline agents
+        for (let airline of airlineDataset) {
+            users.push(await User.register(new User({
+                name: airline.name,
+                email: `agent@${airline.iata.toLowerCase()}.com`,
+                role: "Agent"
+            }), airline.iata));
         }
-        return subscribers;
+
+        // Register subscribers
+        for (let i = 1; i <= 20; i++) {
+            users.push(await User.register(new User({
+                name: `${faker.person.firstName()} ${faker.person.lastName()}`,
+                email: faker.internet.email(),
+                role: "Subscriber"
+            }), faker.internet.password()));
+        }
+
+        return users;
     } catch (error) {
         console.error(error);
         return [];
     }
 };
-
 
 module.exports = generateUsers;

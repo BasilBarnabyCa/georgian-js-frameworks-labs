@@ -7,6 +7,12 @@ var config = require('./config/globals');
 var mongoose = require('mongoose');
 var hbs = require("hbs");
 var helpers = require("./helpers");
+var passport = require("passport");
+var session = require("express-session");
+var User = require("./models/user");
+
+// Middleware
+var AuthenticationMiddleware = require("./middlewares/authentication");
 
 // Route Declarations
 var guestRouter = require('./routes/guest');
@@ -34,8 +40,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Configure Session
+app.use(session({
+	secret: "flightdeck2024",
+	resave: false,
+	saveUninitialized: false
+}));
+
+// Initialize Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Passport Strategies
+passport.use(User.createStrategy());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 app.use('/', guestRouter);
-app.use('/admin', adminRouter);
+app.use('/admin', AuthenticationMiddleware(["Admin"]), adminRouter);
 app.use('/users', usersRouter);
 
 // Helpers
