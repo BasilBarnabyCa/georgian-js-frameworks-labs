@@ -9,6 +9,7 @@ var hbs = require("hbs");
 var helpers = require("./helpers");
 
 // Route Declarations
+var guestRouter = require('./routes/guest');
 var adminRouter = require('./routes/admin');
 var usersRouter = require('./routes/users');
 
@@ -33,6 +34,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', guestRouter);
 app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
 

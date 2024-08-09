@@ -4,7 +4,7 @@ var mainLayout = "layouts/main";
 
 /* GET home page. */
 router.get("/dashboard", function (req, res, next) {
-  res.render("index", { title: "Dashboard", breadcrumbs: "Home", layout: mainLayout });
+  res.render("admin/dashboard", { title: "Dashboard", breadcrumbs: "Home", layout: mainLayout });
 });
 
 /* Access Control Routes */
