@@ -15,7 +15,7 @@ const props = {
 /* GET /admin/subscribers */
 router.get("/", async (req, res, next) => {
   try {
-    let users = await User.find({ role: "User" }).sort([["name", "ascending"]]);
+    let users = await User.find({ role: "Subscriber" }).sort([["name", "ascending"]]);
     res.render(`${props.url}/index`, {
       layout: mainLayout,
       title: "Subscribers",

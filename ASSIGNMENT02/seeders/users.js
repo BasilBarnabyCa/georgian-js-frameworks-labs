@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const { faker } = require('@faker-js/faker');
 const airlineDataset = require('./airlines');
 
 const saltRounds = 10;
@@ -20,11 +21,33 @@ const generateUsers = async () => {
             { name: "John Doe", username: "user", email: "user@email.com", password: await bcrypt.hash("user", saltRounds), role: "User" }
         ];
         const airlineUsers = await hashPasswords(airlineDataset);
-        return users.concat(airlineUsers);
+		const subscriberUsers = await generateSubscribers();
+        return users.concat(airlineUsers, subscriberUsers);
     } catch (error) {
         console.error(error);
         return [];
     }
 };
+
+const generateSubscribers = async () => {
+    try {
+        const subscribers = [];
+        for (let i = 1; i <= 20; i++) {
+            let subscriber = {
+                name: `${faker.person.firstName()} ${faker.person.lastName()}`,
+                username: faker.internet.userName(),
+                email: faker.internet.email(),
+                password: await bcrypt.hash("password", saltRounds),
+                role: "Subscriber"
+            };
+            subscribers.push(subscriber);
+        }
+        return subscribers;
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+};
+
 
 module.exports = generateUsers;
