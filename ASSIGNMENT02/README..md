@@ -17,6 +17,7 @@ Check out the live demo of the FlightDeck application [here](https://flightdeck-
 - **Authentication:** 
   - Users can sign up and log in using secure authentication.
   - Role-based access control to ensure data security.
+  - Users can login with GitHub
 
 - **Flight Management:**
   - Manage airlines, airports, and flights with CRUD operations.

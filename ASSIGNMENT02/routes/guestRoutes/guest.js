@@ -3,7 +3,6 @@ var router = express.Router();
 var guestLayout = "layouts/guest";
 var passport = require("passport");
 const user = require("../../models/user");
-
 const Airline = require("../../models/airline");
 
 

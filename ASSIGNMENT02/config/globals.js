@@ -6,6 +6,10 @@ const configurations = {
 	},
 	ApiKeys: {
 		OpenAI: process.env.OPENAI_API_KEY
+	},
+	Credentials: {
+		GmailUser: process.env.GMAIL_USER,
+		GmailPass: process.env.GMAIL_PASS
 	}
 }
 
