@@ -56,8 +56,8 @@ The application leverages the OpenAI API to provide advanced features such as na
 ## Installation
 1. **Clone the Repository**		
    ```bash
-   git clone https://github.com/yourusername/flightdeck-webapp.git
-   cd flightdeck-webapp		
+   git clone https://github.com/BasilBarnabyCa/COMP2068JSFrameworks.git
+   cd COMP2068JSFrameworks/ASSIGNMENT02
 
 2. **Clone the Repository**		
    ```bash
