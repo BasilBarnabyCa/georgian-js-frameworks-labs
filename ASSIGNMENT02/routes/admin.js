@@ -25,6 +25,10 @@ router.use("/airlines", airlinesRouter);
 var airportsRouter = require("./airportAdminRoutes/airports");
 router.use("/airports", airportsRouter);
 
+/* Admin Route Routes */
+var routesRouter = require("./airportAdminRoutes/routes");
+router.use("/routes", routesRouter);
+
 /* Admin Flight Routes */
 var flightsRouter = require("./airportAdminRoutes/flights");
 router.use("/flights", flightsRouter);

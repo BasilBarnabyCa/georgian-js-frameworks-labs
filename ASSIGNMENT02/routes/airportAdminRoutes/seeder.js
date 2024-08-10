@@ -16,6 +16,8 @@ const carouselDataset = require("../../seeders/carousels");
 
 const CheckInCounter = require("../../models/checkInCounter");
 
+const Route = require("../../models/route");
+
 const Flight = require("../../models/flight");
 
 const Role = require("../../models/role");
@@ -36,7 +38,8 @@ const props = {
     carousels: "carousels",
     checkInCounters: "check-in-counters",
     flights: "flights",
-	accessControl: "access-control",
+    routes: "routes",
+    accessControl: "access-control",
   },
 };
 
@@ -119,6 +122,17 @@ const generateCheckInCounters = (numCounters) => {
   return counters;
 };
 
+router.get("/seed-routes", async (req, res, next) => {
+  try {
+    await Route.deleteMany({});
+    const routes = generateRoutes(100);
+    await Route.insertMany(routes);
+    res.redirect(`/${props.url}`);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get("/seed-flights", async (req, res, next) => {
   try {
     await Flight.deleteMany({});
@@ -130,6 +144,27 @@ router.get("/seed-flights", async (req, res, next) => {
   }
 });
 
+const generateRoutes = (numRoutes) => {
+  const routes = [];
+
+  for (let i = 0; i < numRoutes; i++) {
+    const originIndex = Math.floor(Math.random() * airlineDataset.length);
+    let destinationIndex;
+    do {
+      destinationIndex = Math.floor(Math.random() * airlineDataset.length);
+    } while (destinationIndex === originIndex);
+
+    routes.push({
+      originAirport: airportDataset[originIndex].iata,
+      originCity: airportDataset[originIndex].city,
+      destinationAirport: airportDataset[destinationIndex].iata,
+      destinationCity: airportDataset[destinationIndex].city,
+    });
+  }
+
+  return routes;
+};
+
 const generateRandomTime = (baseTime) => {
   const randomOffset = Math.floor(Math.random() * 720) - 360; // Random offset between -6 and 6 hours
   return new Date(baseTime.getTime() + randomOffset * 60000); // Offset in milliseconds
@@ -137,7 +172,6 @@ const generateRandomTime = (baseTime) => {
 
 // TODO: FIX arrival date to be after departure date
 const generateFlights = (numFlights) => {
-  const flights = [];
   const baseTime = new Date();
   let carousel = "";
 
