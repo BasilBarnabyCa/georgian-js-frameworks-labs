@@ -93,8 +93,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use('/', guestRouter);
-app.use('/admin', adminRouter);
-// app.use('/admin', AuthenticationMiddleware(["Admin"]), adminRouter);
+// app.use('/admin', adminRouter);
+app.use('/admin', AuthenticationMiddleware(["Admin"]), adminRouter);
 app.use('/subscriber', AuthenticationMiddleware(["Subscriber"]), subscriberRouter);
 
 // Helpers
