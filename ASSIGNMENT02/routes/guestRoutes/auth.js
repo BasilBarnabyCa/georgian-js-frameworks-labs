@@ -8,14 +8,14 @@ var config = require('../../config/globals');
 
 // Configure Nodemailer for Gmail
 const transporter = nodemailer.createTransport({
-  service: 'Gmail',
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: config.Credentials.GmailUser,
-    pass: config.Credentials.GmailPass
-  }
+	service: 'Gmail',
+	host: "smtp.gmail.com",
+	port: 465,
+	secure: true,
+	auth: {
+		user: config.Credentials.Gmail.User,
+		pass: config.Credentials.Gmail.Pass
+	}
 });
 
 router.get("/login", (req, res, next) => {
@@ -29,6 +29,24 @@ router.post("/login", passport.authenticate("local", {
 	failureRedirect: "/login",
 	failureMessage: "Invalid Credentials",
 }));
+
+// GET /github
+// triggers when user clicks on the "Login with Github" button on the login page
+// user is sent to github.com in order to provide credentials
+router.get(
+	"/github",
+	passport.authenticate("github", { scope: ["user.email"] })
+);
+
+// GET /github/callback
+router.get(
+	"/github/callback", // path
+	passport.authenticate("github", { failureRedirect: "/login" }), // github middleware
+	(req, res, next) => {
+		res.redirect("/");
+	} // custom middleware (success)
+);
+
 
 router.get("/sign-up", (req, res, next) => {
 	res.render("auth/signup", { title: "Sign-up", layout: authLayout });
@@ -58,7 +76,7 @@ router.post("/sign-up", (req, res, next) => {
 				try {
 					await transporter.sendMail({
 						from: '"FlightDeck Support" <support@flightdeck.com>',
-						to: newUser.email, 
+						to: newUser.email,
 						subject: "Welcome to FlightDeck!",
 						text: "Welcome to FlightDeck! We're thrilled to have you on board. Get ready to explore and manage your flights like never before.",
 						html: `
@@ -82,7 +100,7 @@ router.post("/sign-up", (req, res, next) => {
 
 router.get("/logout", (req, res, next) => {
 	req.logout((err) => {
-	  res.redirect("/");
+		res.redirect("/");
 	});
 });
 

@@ -27,22 +27,26 @@
 			<a href="#" class="text-2xl font-bold text-blue-600">FlightDeck</a>
 			<div class="flex space-x-4">
 				<nav class="hidden md:flex space-x-8 items-center">
-		
+
 					<a href="/airlines-demo" class="text-gray-700 hover:text-blue-600">Collections Demo</a>
-					<a href="https://github.com/BasilBarnabyCa/COMP2068JSFrameworks" target="_blank" class="text-gray-700 hover:text-blue-600">GitHub Repo</a>
+					<a href="https://github.com/BasilBarnabyCa/COMP2068JSFrameworks" target="_blank"
+						class="text-gray-700 hover:text-blue-600">GitHub Repo</a>
 				</nav>
 				{{#if user}}
-					<p>Welcome back, {{user.name}}.</p>
-					<a href="/logout"
-						class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
-						Logout</a>
+				<p>Welcome back, {{user.name}}.</p>
+				<a href="/logout"
+					class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
+					Logout</a>
 				{{else}}
 				<a href="/login"
-						class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
-						Login</a>
-					<a href="/sign-up"
-						class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
-						Sign up</a>
+					class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
+					Login</a>
+				<a href="/github"
+					class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
+					Login with GitHub</a>
+				<a href="/sign-up"
+					class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
+					Sign up</a>
 				{{/if}}
 			</div>
 			<!-- Mobile Menu Button -->

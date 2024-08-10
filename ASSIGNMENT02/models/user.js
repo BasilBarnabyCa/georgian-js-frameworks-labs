@@ -13,7 +13,10 @@ const dataSchemaObject = {
 	role: {
 		type: String,
 		required: true,
-	}
+		default: "Subscriber",
+	},
+	oauthId: { type: String },
+	oauthProvider: { type: String }
 };
 const mongooseSchema = mongoose.Schema(dataSchemaObject, {
 	timestamps: true

@@ -8,9 +8,17 @@ const configurations = {
 		OpenAI: process.env.OPENAI_API_KEY
 	},
 	Credentials: {
-		GmailUser: process.env.GMAIL_USER,
-		GmailPass: process.env.GMAIL_PASS
+		Gmail: {
+			User: process.env.GMAIL_USER,
+			Pass: process.env.GMAIL_PASS
+		},
+		Github: {
+			ClientID: process.env.GITHUB_CLIENT_ID,
+			ClientSecret: process.env.GITHUB_CLIENT_SECRET,
+			CallbackUrl: process.env.GITHUB_CALLBACK_URL
+		},
 	}
+
 }
 
 module.exports = configurations;

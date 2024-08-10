@@ -10,6 +10,7 @@ var helpers = require("./helpers");
 var passport = require("passport");
 var session = require("express-session");
 var User = require("./models/user");
+var githubStrategy = require("passport-github2").Strategy;
 
 // Middleware
 var AuthenticationMiddleware = require("./middlewares/authentication");
@@ -54,9 +55,42 @@ app.use(passport.session());
 // Passport Strategies
 passport.use(User.createStrategy());
 
+// GitHub Strategy
+passport.use(new githubStrategy(
+	{
+		clientID: config.Credentials.Github.ClientID,
+		clientSecret: config.Credentials.Github.ClientSecret,
+		callbackURL: config.Credentials.Github.CallbackUrl
+	},
+	// callback function
+	// profile is github profile
+	async (accessToken, refreshToken, profile, done) => {
+		// search user by ID
+		const user = await User.findOne({ oauthId: profile.id });
+		// user exists (returning user)
+		if (user) {
+			// no need to do anything else
+			return done(null, user);
+		}
+		else {
+			// new user so register them in the db
+			const newUser = new User({
+				name: profile.username,
+				email: profile.username,
+				oauthId: profile.id,
+				oauthProvider: 'Github'
+			});
+			// add to DB
+			const savedUser = await newUser.save();
+			// return
+			return done(null, savedUser);
+		}
+	}
+
+));
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
 
 app.use('/', guestRouter);
 app.use('/admin', AuthenticationMiddleware(["Admin"]), adminRouter);
