@@ -1,5 +1,6 @@
 const hbs = require("hbs");
 
+// Format a date and time string
 const formatDateTime = (date) => {
 	const options = {
 		year: "numeric",
@@ -12,6 +13,7 @@ const formatDateTime = (date) => {
 	return new Date(date).toLocaleString("en-CA", options).replace(",", "");
 };
 
+// Format a time string in 12-hour format
 const formatTime12Hour = (date) => {
 	const options = { hour: "numeric", minute: "2-digit", hour12: true };
 	return new Date(date)
@@ -20,6 +22,7 @@ const formatTime12Hour = (date) => {
 		.toUpperCase();
 };
 
+// Get the status class based on the status
 const getStatusClass = (status) => {
 	switch (status) {
 		case "On-time":
@@ -33,6 +36,7 @@ const getStatusClass = (status) => {
 	}
 };
 
+// Get the role class based on the role
 const getRoleClass = (role) => {
 	switch (role) {
 		case "Admin":
@@ -45,6 +49,7 @@ const getRoleClass = (role) => {
 };
 
 const getHelpers = () => {
+	// Register Date and time Helpers
 	hbs.registerHelper("toShortDate", (longDateValue) => {
 		return new hbs.SafeString(longDateValue.toLocaleDateString("en-CA"));
 	});
@@ -57,6 +62,7 @@ const getHelpers = () => {
 		return new hbs.SafeString(formatTime12Hour(date));
 	});
 
+	// Register Status and Role Tag Formatting Helpers
 	hbs.registerHelper("getStatusClass", (status) => {
 		return new hbs.SafeString(getStatusClass(status));
 	});
@@ -65,13 +71,41 @@ const getHelpers = () => {
 		return new hbs.SafeString(getRoleClass(role));
 	});
 
+	// Register Table Helpers
 	hbs.registerHelper("incrementedIndex", function (index) {
 		return index + 1;
 	});
 
+	// Register Comparison Helper
 	hbs.registerHelper('eq', function (arg1, arg2) {
 		return arg1 == arg2;
 	});
+
+	// Register Select Helpers
+	hbs.registerHelper("selectAirline", (airline, selectedAirline) => {
+		return airline === selectedAirline ? "selected" : "";
+	});
+
+	hbs.registerHelper("trimFlightNumber", (flightNumber) => {
+		return flightNumber ? flightNumber.substring(2) : "";
+	});
+
+	hbs.registerHelper("selectItem", ( currentItem, newItem) => {
+		return currentItem === newItem ? "selected" : "";
+	});
+
+	hbs.registerHelper("selectAirport", (airportIATA, selectedIATA) => {
+		return airportIATA === selectedIATA ? "selected" : "";
+	});
+
+	hbs.registerHelper("selectGateCarousel", (name, selectedName) => {
+		return name === selectedName ? "selected" : "";
+	});
+
+	hbs.registerHelper("selectRole", function(roleName, selectedRole) {
+		return roleName === selectedRole ? "selected" : "";
+	});
+	
 };
 
 module.exports = {

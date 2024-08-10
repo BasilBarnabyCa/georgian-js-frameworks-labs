@@ -5,6 +5,7 @@ var mainLayout = "layouts/main"; // Dashboard layout
 const User = require("../../models/user");
 const Role = require("../../models/role");
 const bcrypt = require("bcrypt");
+const roles = require("../../seeders/roles");
 const saltRounds = 10;
 
 // Define the props object
@@ -51,9 +52,9 @@ router.post("/add", async (req, res, next) => {
     let newUser = new User({
       name: req.body.name,
       email: req.body.email,
-      password: await bcrypt.hash(req.body.password, saltRounds),
       role: req.body.role,
     });
+	await newUser.setPassword(req.body.password);
     await newUser.save();
     res.redirect(`/${props.url}`);
   } catch (error) {
@@ -66,11 +67,15 @@ router.get("/edit/:_id", async (req, res, next) => {
   try {
     let userId = req.params._id;
     let userData = await User.findById(userId);
+	let roleList = await Role.find({ name: { $in: ["Admin", "Agent"] } }).sort([
+		["name", "ascending"],
+	  ]);
     res.render(`${props.url}/edit`, {
       layout: mainLayout,
       title: "Edit User",
       props: props,
       user: userData,
+	  roles: roleList
     });
   } catch (error) {
     next(error);
@@ -79,19 +84,30 @@ router.get("/edit/:_id", async (req, res, next) => {
 
 /* UPDATE /admin/users/edit/:_id */
 router.post("/edit/:_id", async (req, res, next) => {
-  try {
-    let userId = req.params._id;
-    await User.findByIdAndUpdate(userId, {
-      name: req.body.name,
-      email: req.body.email,
-      password: bcrypt.hash(req.body.password, saltRounds),
-      role: req.body.role,
-    });
-    res.redirect(`/${props.url}`);
-  } catch (error) {
-    next(error);
-  }
-});
+	try {
+	  let userId = req.params._id;
+	  let user = await User.findById(userId);
+  
+	  if (!user) {
+		throw new Error("User not found");
+	  }
+  
+	  user.name = req.body.name;
+	  user.email = req.body.email;
+	  user.role = req.body.role;
+  
+	  // If a new password is provided, set it using passport-local-mongoose's setPassword method
+	  if (req.body.password && req.body.password.trim() !== "") {
+		await user.setPassword(req.body.password);
+	  }
+
+	  await user.save();
+  
+	  res.redirect(`/${props.url}`);
+	} catch (error) {
+	  next(error);
+	}
+  });
 
 /* DELETE /admin/users/delete/:_id */
 router.get("/delete/:_id", async (req, res, next) => {

@@ -7,20 +7,113 @@
 				<h6 class="font-bold mb-6">{{{props.type}}} Details</h6>
 			</div>
 			<form method="POST">
-				<div class="flex-auto px-6 pt-0 pb-2">
-					<input type="text" name="name" id="name" placeholder="Name" required value="{{airport.name}}"
-						class="mb-6 focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none"></input>
-					<div class="flex space-x-4 mb-6">
-						<input type="text" name="iata" id="iata" placeholder="IATA" required value="{{airport.iata}}"
-							class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-1/2 appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none"></input>
-						<input type="text" name="icao" id="icao" placeholder="IATA" required value="{{airport.icao}}"
-							class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-1/2 appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none"></input>
+				<div class="flex-auto px-6 pt-0 space-y-2">
+					<div class="flex space-x-4">
+						<div class="w-2/5">
+							<label for="airline" class="w-full py-2 ">Airline</label>
+							<select name="airline" id="airline"
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+								{{#each airlines}}
+								<option value="{{this.name}}" {{selectAirline this.name ../flight.airline}}>{{this.name}}
+								</option>
+								{{/each}}
+							</select>
+						</div>
+						<div class="w-2/5">
+							<label for="flightNumber" class="w-full py-2 ">Flight Number</label>
+							<input type="text" name="flightNumber" id="flightNumber" placeholder="Flight Number" required
+								value="{{trimFlightNumber flight.flightNumber}}"
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none"></input>
+						</div>
+						<div class="w-2/5">
+							<label for="movementType" class="w-full py-2 ">Movement Type</label>
+							<select name="movementType" id="movementType"
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+								{{#each movementTypes}}
+								<option value="{{this}}" {{selectItem this ../flight.movementType}}>{{this}}
+								</option>
+								{{/each}}
+							</select>
+						</div>
 					</div>
-					<div class="flex justify-end space-x-4">
-						<button  onclick="window.history.back()" class="inline-block px-6 w-30 py-3 mr-3 font-bold text-center text-slate-900 uppercase align-middle transition-all rounded-lg cursor-pointer bg-slate-200 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">Cancel</button>
-						<button type="submit" class="inline-block px-6 py-3 w-30 mr-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-emerald-500 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">Update</button>
+					<div class="flex space-x-4">
+						<div class="w-1/2">
+							<label for="originAirport" class="w-full py-2 ">Origin Airport</label>
+							<select name="originAirport" id="originAirport"
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+								{{#each originAirports}}
+								<option value="{{this.iata}}" {{selectAirport this.iata ../flight.originAirport}}>
+									{{this.iata}} - {{this.city}}</option>
+								{{/each}}
+							</select>
+						</div>
+						<div class="w-1/2">
+							<label for="destinationAirport" class="w-full py-2 ">Destination Airport</label>
+							<select name="destinationAirport" id="destinationAirport"
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+								{{#each destinationAirports}}
+								<option value="{{this.iata}}" {{selectAirport this.iata ../flight.destinationAirport}}>
+									{{this.iata}} - {{this.city}}</option>
+								{{/each}}
+							</select>
+						</div>
 					</div>
-				</div>
+					<div class="flex space-x-4">
+						<div class="w-1/2">
+							<label for="departureTime" class="w-full py-2 ">Departure Time</label>
+							<input type="datetime-local" name="departureTime" id="departureTime"
+								value="{{toDateTime flight.departureTime}}" placeholder="Origin Airport" required
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+						</div>
+						<div class="w-1/2">
+							<label for="arrivalTime" class="w-full py-2 ">Arrival Time</label>
+							<input type="datetime-local" name="arrivalTime" id="arrivalTime"
+								value="{{toDateTime flight.arrivalTime}}" placeholder="Destination Airport" required
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+						</div>
+					</div>
+					<div class="flex space-x-4">
+						<div class="w-1/2">
+							<label for="gate" class="w-full py-2 ">Gate</label>
+							<select name="gate" id="gate"
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+								{{#each gates}}
+								<option value="{{this.name}}" {{selectGateCarousel this.name ../flight.gate}}>
+									{{this.name}}</option>
+								{{/each}}
+							</select>
+						</div>
+						<div class="w-1/2">
+							<label for="carousel" class="w-full py-2 ">Carousel</label>
+							<select name="carousel" id="carousel"
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+								{{#each carousels}}
+								<option value="{{this.name}}" {{selectGateCarousel this.name ../flight.carousel}}>
+									{{this.name}}</option>
+								{{/each}}
+							</select>
+						</div>
+					</div>
+					<div class="flex space-x-4">
+						<div class="w-1/2">
+							<label for="status" class="w-full py-2 ">Status</label>
+							<select name="status" id="status"
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+								{{#each statuses}}
+								<option value="{{this}}" {{selectItem this ../flight.status}}>{{this}}
+								</option>
+								{{/each}}
+							</select>
+							<div class="w-1/2"></div>
+						</div>
+					</div>
+						<div class="flex justify-end space-x-4">
+							<button onclick="window.history.back()"
+								class="inline-block px-6 w-30 py-3 mr-3 font-bold text-center text-slate-900 uppercase align-middle transition-all rounded-lg cursor-pointer bg-slate-200 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">Cancel</button>
+							<button type="submit"
+								class="inline-block px-6 py-3 w-30 mr-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-emerald-500 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">Update</button>
+						</div>
+					</div>
 			</form>
 		</div>
 	</div>

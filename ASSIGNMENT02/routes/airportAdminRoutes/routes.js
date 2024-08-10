@@ -30,10 +30,10 @@ router.get("/add", (req, res, next) => {
 router.post("/add", async (req, res, next) => {
 	try {
 		let newRoute = new Route({
-			name: req.body.name,
-			iata: req.body.iata,
-			icao: req.body.icao,
-			createDate: new Date()
+			originAirport: req.body.originAirport,
+			originCity: req.body.originCity,
+			destinationAirport: req.body.destinationAirport,
+			destinationCity: req.body.destinationCity,
 		});
 		await newRoute.save();
 		res.redirect(`/${props.url}`);
@@ -60,9 +60,10 @@ router.post("/edit/:_id", async (req, res, next) => {
 		await Route.findByIdAndUpdate(
 			routeId,
 			{
-				name: req.body.name,
-				iata: req.body.iata,
-				icao: req.body.icao
+				originAirport: req.body.originAirport,
+				originCity: req.body.originCity,
+				destinationAirport: req.body.destinationAirport,
+				destinationCity: req.body.destinationCity,
 			}
 		);
 		res.redirect(`/${props.url}`);

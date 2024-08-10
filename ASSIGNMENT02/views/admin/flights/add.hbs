@@ -7,29 +7,38 @@
 				<h6 class="font-bold mb-6">{{{props.type}}} Details</h6>
 			</div>
 			<form method="POST">
-				<div class="flex-auto px-6 pt-0 pb-2">
-
+				<div class="flex-auto px-6 pt-0 space-y-2">
 					<div class="flex space-x-4">
-						<select name="airline" id="airline"
-							class="mb-6 focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-2/5 appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
-							{{#each airlines}}
-							<option>{{this.name}}</option>
-							{{/each}}
-						</select>
-						<input type="text" name="flightNumber" id="flightNumber" placeholder="Flight Number" required
-							class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-2/5 appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none mb-6"></input>
-						<select name="type" id="type"
-							class="mb-6 focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-2/5 appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
-							{{#each types}}
-							<option>{{this}}</option>
-							{{/each}}
-						</select>
+						<div class="w-2/5">
+							<label for="airline" class="w-full py-2 ">Airline</label>
+							<select name="airline" id="airline"
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+								{{#each airlines}}
+								<option>{{this.name}}</option>
+								{{/each}}
+							</select>
+						</div>
+						<div class="w-2/5">
+							<label for="flightNumber" class="w-full py-2 ">Flight Number</label>
+							<input type="text" name="flightNumber" id="flightNumber" placeholder="Flight Number"
+								required
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none"></input>
+						</div>
+						<div class="w-2/5">
+							<label for="movementType" class="w-full py-2 ">Movement Type</label>
+							<select name="movementType" id="movementType"
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+								{{#each movementTypes}}
+								<option>{{this}}</option>
+								{{/each}}
+							</select>
+						</div>
 					</div>
 					<div class="flex space-x-4">
 						<div class="w-1/2">
 							<label for="originAirport" class="w-full py-2 ">Origin Airport</label>
 							<select name="originAirport" id="originAirport"
-								class="mb-6 focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
 								{{#each originAirports}}
 								<option option>{{this.iata}} - {{this.city}}</option>
 								{{/each}}
@@ -38,7 +47,7 @@
 						<div class="w-1/2">
 							<label for="destinationAirport" class="w-full py-2 ">Destination Airport</label>
 							<select name="destinationAirport" id="destinationAirport"
-								class="mb-6 focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
 								{{#each destinationAirports}}
 								<option option>{{this.iata}} - {{this.city}}</option>
 								{{/each}}
@@ -63,7 +72,7 @@
 						<div class="w-1/2">
 							<label for="gate" class="w-full py-2 ">Gate</label>
 							<select name="gate" id="gate"
-								class="mb-6 focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
 								{{#each gates}}
 								<option option>{{this.name}}</option>
 								{{/each}}
@@ -72,7 +81,7 @@
 						<div class="w-1/2">
 							<label for="carousel" class="w-full py-2 ">Carousel</label>
 							<select name="carousel" id="carousel"
-								class="mb-6 focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+								class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
 								{{#each carousels}}
 								<option option>{{this.name}}</option>
 								{{/each}}
@@ -82,9 +91,9 @@
 
 					<div class="flex justify-end space-x-4">
 						<button onclick="window.history.back()"
-							class="inline-block px-6 w-30 py-3 mr-3 font-bold text-center text-slate-900 uppercase align-middle transition-all rounded-lg cursor-pointer bg-slate-200 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">Cancel</button>
+							class="mt-6 inline-block px-6 w-30 py-3 mr-3 font-bold text-center text-slate-900 uppercase align-middle transition-all rounded-lg cursor-pointer bg-slate-200 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">Cancel</button>
 						<button type="submit"
-							class="inline-block px-6 py-3 w-30 mr-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-emerald-500 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">Save</button>
+							class="mt-6 inline-block px-6 py-3 w-30 mr-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-emerald-500 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">Save</button>
 					</div>
 				</div>
 			</form>

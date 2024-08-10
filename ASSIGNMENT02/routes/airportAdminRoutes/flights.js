@@ -30,7 +30,7 @@ router.get("/add", async (req, res, next) => {
 	let airlineList = await Airline.find().sort([
 		["name", "ascending"],
 	]);
-	let typeList = ["Departure", "Arrival"];
+	let movementTypeList = ["Departure", "Arrival"];
 	let originAirportList = await Airport.find().sort([
 		["name", "ascending"],
 	]);
@@ -44,7 +44,7 @@ router.get("/add", async (req, res, next) => {
 		["name", "ascending"],
 	]);
 
-	res.render(`${props.url}/add`, { layout: mainLayout, title: "Add Flight", props: props, airlines: airlineList, types: typeList, originAirports: originAirportList, destinationAirports: destinationAirportList, gates: gateList, carousels: carouselList });
+	res.render(`${props.url}/add`, { layout: mainLayout, title: "Add Flight", props: props, airlines: airlineList, movementTypes: movementTypeList, originAirports: originAirportList, destinationAirports: destinationAirportList, gates: gateList, carousels: carouselList });
 });
 
 /* POST /admin/flights/add */
@@ -56,7 +56,7 @@ router.post("/add", async (req, res, next) => {
 		let newFlight = new Flight({
 			airline: req.body.airline,
 			flightNumber: `${airline.iata}${req.body.flightNumber}`,
-			movementType: req.body.type,
+			movementType: req.body.movementType,
 			originAirport: originAirport.iata,
 			originCity: originAirport.city,
 			destinationAirport: destinationAirport.iata,
@@ -79,7 +79,24 @@ router.get("/edit/:_id", async (req, res, next) => {
 	try {
 		let flightId = req.params._id;
 		let flightData = await Flight.findById(flightId);
-		res.render(`${props.url}/edit`, { layout: mainLayout, title: "Edit Flight", props: props, flight: flightData });
+		let airlineList = await Airline.find().sort([
+			["name", "ascending"],
+		]);
+		let movementTypeList = ["Departure", "Arrival"];
+		let originAirportList = await Airport.find().sort([
+			["name", "ascending"],
+		]);
+		let destinationAirportList = await Airport.find().sort([
+			["name", "ascending"],
+		]);
+		let gateList = await Gate.find().sort([
+			["name", "ascending"],
+		]);
+		let carouselList = await Carousel.find().sort([
+			["name", "ascending"],
+		]);
+		let statusList = ["Scheduled", "On-time", "Delayed", "Cancelled"];
+		res.render(`${props.url}/edit`, { layout: mainLayout, title: "Edit Flight", props: props, flight: flightData, airlines: airlineList, movementTypes: movementTypeList, originAirports: originAirportList, destinationAirports: destinationAirportList, gates: gateList, carousels: carouselList, statuses: statusList });
 	} catch (error) {
 		next(error);
 	}
@@ -97,7 +114,7 @@ router.post("/edit/:_id", async (req, res, next) => {
 			{
 				airline: req.body.airline,
 				flightNumber: `${airline.iata}${req.body.flightNumber}`,
-				movementType: req.body.type,
+				movementType: req.body.movementType,
 				originAirport: originAirport.iata,
 				originCity: originAirport.city,
 				destinationAirport: destinationAirport.iata,
