@@ -6,7 +6,7 @@ FlightDeck is a web application designed to manage and monitor flight operations
 
 ## Live Demo
 
-Check out the live demo of the FlightDeck application [here](flightdeck-web-app.azurewebsites.net).
+Check out the live demo of the FlightDeck application [here](https://flightdeck-web-app.azurewebsites.net).
 
 ## Features
 - **User Roles:** 
