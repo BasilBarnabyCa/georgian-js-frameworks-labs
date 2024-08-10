@@ -1,0 +1,127 @@
+<div class="container mt-10">
+	<div class="flex flex-wrap -mx-3">
+		<div class="flex-none w-full max-w-full px-3">
+			<h6 class="text-xl font-semibold mb-5">{{{title}}}</h6>
+			<div
+				class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
+				<div class="flex-auto px-0 pt-0 pb-2">
+					<div class="p-0 overflow-x-auto">
+						<table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
+							<thead class="align-bottom">
+								<tr>
+									<th
+										class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+										#</th>
+									<th
+										class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+										Airline</th>
+									<th
+										class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+										Flight Number</th>
+									<th
+										class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+										Type</th>
+									<th
+										class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+										Origin Airport</th>
+									<th
+										class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+										Origin City</th>
+									<th
+										class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+										Destination Airport</th>
+									<th
+										class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+										Destination City</th>
+									<th
+										class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+										Departure Time</th>
+									<th
+										class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+										Arrival Time</th>
+									<th
+										class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+										Gate</th>
+									<th
+										class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+										Carousel</th>
+									<th
+										class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+										Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								{{#each dataset}}
+								<tr>
+									<td
+										class="p-2 px-6 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+										<p class="mb-0 text-xs font-semibold leading-tight">{{incrementedIndex @index}}
+										</p>
+									</td>
+									<td
+										class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+										<div class="flex px-4 py-1">
+											<div class="flex flex-col justify-center">
+												<h6 class="mb-0 text-sm leading-normal">{{this.airline}}</h6>
+											</div>
+										</div>
+									</td>
+									<td
+										class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+										<p class="mb-0 text-xs font-semibold leading-tight">{{this.flightNumber}}</p>
+									</td>
+									<td
+										class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+										<p class="mb-0 text-xs font-semibold leading-tight">{{this.movementType}}</p>
+									</td>
+									<td
+										class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+										<p class="mb-0 text-xs font-semibold leading-tight">{{this.originAirport}}</p>
+									</td>
+									<td
+										class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+										<p class="mb-0 text-xs font-semibold leading-tight">{{this.originCity}}</p>
+									</td>
+									<td
+										class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+										<p class="mb-0 text-xs font-semibold leading-tight">{{this.destinationAirport}}
+										</p>
+									</td>
+									<td
+										class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+										<p class="mb-0 text-xs font-semibold leading-tight">{{this.destinationCity}}</p>
+									</td>
+									<td
+										class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+										<p class="mb-0 text-xs font-semibold leading-tight">{{ toDateTime
+											this.departureTime}}</p>
+									</td>
+									<td
+										class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+										<p class="mb-0 text-xs font-semibold leading-tight">{{ toDateTime
+											this.arrivalTime}}
+										</p>
+									</td>
+									<td
+										class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+										<p class="mb-0 text-xs font-semibold leading-tight">{{this.gate}}</p>
+									</td>
+									<td
+										class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+										<p class="mb-0 text-xs font-semibold leading-tight">{{this.carousel}}</p>
+									</td>
+									<td
+										class="p-2 text-sm leading-normal text-left align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+										<span
+											class="px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white {{getStatusClass this.status}}">{{this.status}}</span>
+									</td>
+								</tr>
+								{{/each}}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

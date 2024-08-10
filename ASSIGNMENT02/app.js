@@ -18,7 +18,7 @@ var AuthenticationMiddleware = require("./middlewares/authentication");
 // Route Declarations
 var guestRouter = require('./routes/guest');
 var adminRouter = require('./routes/admin');
-var usersRouter = require('./routes/users');
+var subscriberRouter = require('./routes/subscriber');
 
 // Connect to MongoDB
 mongoose
@@ -94,7 +94,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use('/', guestRouter);
 app.use('/admin', AuthenticationMiddleware(["Admin"]), adminRouter);
-app.use('/users', usersRouter);
+app.use('/subscriber', AuthenticationMiddleware(["Subscriber"]), subscriberRouter);
 
 // Helpers
 helpers.getHelpers();
