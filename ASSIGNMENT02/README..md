@@ -63,7 +63,7 @@ Check out the live demo of the FlightDeck application [here](https://flightdeck-
 - **Seeders:**
   - Predefined data for airlines and airports can be seeded into the database for initial setup.
 
-## Additional Features: Nodemailer and OpenAI Integration
+## Additional Features: Nodemailer and Gmail Integration
 
 ### Nodemailer Integration
 
