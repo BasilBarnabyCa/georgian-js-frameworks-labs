@@ -112,7 +112,9 @@ The application integrates Nodemailer to handle email notifications, providing u
 
 3. **Set Up Environment Variables**		
    ```bash
-   npm install		
+   cp .env.example .env
+   ```
+   Enter the appropriate values for each key.
 
 4. **Run Database Seeders**		
 	Log in as the admin with the following credentials:
