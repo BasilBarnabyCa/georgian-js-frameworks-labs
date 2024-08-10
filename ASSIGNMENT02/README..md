@@ -1,5 +1,23 @@
 # FlightDeck Web Application
 
+## Table of Contents
+- [Overview](#overview)
+- [Live Demo](#live-demo)
+- [Features](#features)
+  - [User Roles](#user-roles)
+  - [Authentication](#authentication)
+  - [Middleware Rules](#middleware-rules)
+    - [Admin and Agent Routes](#admin-and-agent-routes)
+    - [Subscriber Routes](#subscriber-routes)
+  - [Managing Flights, Airlines, and Airports](#managing-flights-airlines-and-airports)
+- [Additional Features: Nodemailer and OpenAI Integration](#additional-features-nodemailer-and-openai-integration)
+  - [Nodemailer Integration](#nodemailer-integration)
+    - [Set Up SMTP Configuration](#set-up-smtp-configuration)
+    - [Trigger Emails](#trigger-emails)
+    - [How to Generate a Google App Password](#how-to-generate-a-google-app-password)
+- [Installation](#installation)
+- [Acknowledgments](#acknowledgments)
+
 ## Overview
 
 FlightDeck is a web application designed to manage and monitor flight operations. It provides various user roles, including Admin, Agent, and Subscriber, each with distinct access levels and functionalities. This application is built using Node.js, Express, MongoDB, and Handlebars, with user authentication handled by Passport.js.
@@ -11,17 +29,36 @@ Check out the live demo of the FlightDeck application [here](https://flightdeck-
 ## Features
 - **User Roles:** 
   - **Admin:** Full access to manage airlines, airports, flights, and users.
-  - **Agent:** Limited access to manage flights and view specific data related to airlines.
+  - **Agent:** Limited access to manage flights and view specific data related to airlines (coming soon).
   - **Subscriber:** Access to personalized flight information and updates.
 
 - **Authentication:** 
   - Users can sign up and log in using secure authentication.
   - Role-based access control to ensure data security.
-  - Users can login with GitHub
+  - Users can login/sign-up with GitHub
+
+### Middleware Rules
+
+#### Admin and Agent Routes:
+
+- When not logged in, accessing `/admin` or `/agent` returns a 404 error.
+- When logged in as a subscriber, accessing `/admin` or `/agent` returns a 404 error.
+- When logged in as an admin or agent and trying to access `/subscriber`, the user will be logged out and redirected to the login page.
+
+#### Subscriber Routes:
+
+- When not logged in and accessing `/subscriber`, the user is redirected to the login page.
+
+### Managing Flights, Airlines, and Airports
+
+- **Admins** can create, read, update, and delete flights, airlines, and airports.
+- **Agents** have limited access to manage flights associated with their airlines.
+- **Subscribers** can view their flight information and updates.
 
 - **Flight Management:**
   - Manage airlines, airports, and flights with CRUD operations.
   - Real-time updates and status tracking.
+  - Dashboard with KPIs and metrics (coming soon).
 
 - **Seeders:**
   - Predefined data for airlines and airports can be seeded into the database for initial setup.
@@ -90,31 +127,6 @@ The application integrates Nodemailer to handle email notifications, providing u
    ```bash
    nodemon
 
-## Usage
-
-### Authentication
-
-- **Sign Up:** Users can sign up with their name, email, and password.
-- **Log In:** Existing users can log in to access the application and see flight schedules.
-
-### Middleware Rules
-
-#### Admin and Agent Routes:
-
-- When not logged in, accessing `/admin` or `/agent` returns a 404 error.
-- When logged in as a subscriber, accessing `/admin` or `/agent` returns a 404 error.
-- When logged in as an admin or agent and trying to access `/subscriber`, the user will be logged out and redirected to the login page.
-
-#### Subscriber Routes:
-
-- When not logged in and accessing `/subscriber`, the user is redirected to the login page.
-
-### Managing Flights, Airlines, and Airports
-
-- **Admins** can create, read, update, and delete flights, airlines, and airports.
-- **Agents** have limited access to manage flights associated with their airlines.
-- **Subscribers** can view their personalized flight information and updates.
-
 ## Acknowledgments
 
 - [Node.js](https://nodejs.org/)
@@ -123,3 +135,4 @@ The application integrates Nodemailer to handle email notifications, providing u
 - [Passport.js](http://www.passportjs.org/)
 - [Handlebars.js](https://handlebarsjs.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [Nodemailer](https://nodemailer.com/.com/)
