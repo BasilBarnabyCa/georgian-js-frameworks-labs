@@ -3,6 +3,10 @@ var router = express.Router();
 var mainLayout = "layouts/main"; // Dashboard layout
 
 const Flight = require("../../models/flight");
+const Airline = require("../../models/airline");
+const Airport = require("../../models/airport");
+const Gate = require("../../models/gate");
+const Carousel = require("../../models/carousel");
 
 // Define the props object
 const props = {
@@ -22,18 +26,46 @@ router.get("/", async (req, res, next) => {
 });
 
 /* SHOW /admin/flights/add */
-router.get("/add", (req, res, next) => {
-	res.render(`${props.url}/add`, { layout: mainLayout, title: "Add Flight", props: props });
+router.get("/add", async (req, res, next) => {
+	let airlineList = await Airline.find().sort([
+		["name", "ascending"],
+	]);
+	let typeList = ["Departure", "Arrival"];
+	let originAirportList = await Airport.find().sort([
+		["name", "ascending"],
+	]);
+	let destinationAirportList = await Airport.find().sort([
+		["name", "ascending"],
+	]);
+	let gateList = await Gate.find().sort([
+		["name", "ascending"],
+	]);
+	let carouselList = await Carousel.find().sort([
+		["name", "ascending"],
+	]);
+
+	res.render(`${props.url}/add`, { layout: mainLayout, title: "Add Flight", props: props, airlines: airlineList, types: typeList, originAirports: originAirportList, destinationAirports: destinationAirportList, gates: gateList, carousels: carouselList });
 });
 
 /* POST /admin/flights/add */
 router.post("/add", async (req, res, next) => {
 	try {
+		let airline = await Airline.findOne({ name: req.body.airline });
+		let originAirport = await Airport.findOne({ iata: req.body.originAirport.substring(0, 3) });
+		let destinationAirport = await Airport.findOne({ iata: req.body.destinationAirport.substring(0, 3) });
 		let newFlight = new Flight({
-			name: req.body.name,
-			iata: req.body.iata,
-			icao: req.body.icao,
-			createDate: new Date()
+			airline: req.body.airline,
+			flightNumber: `${airline.iata}${req.body.flightNumber}`,
+			movementType: req.body.type,
+			originAirport: originAirport.iata,
+			originCity: originAirport.city,
+			destinationAirport: destinationAirport.iata,
+			destinationCity: destinationAirport.city,
+			departureTime: new Date(req.body.departureTime),
+			arrivalTime: new Date(req.body.arrivalTime),
+			gate: req.body.gate,
+			carousel: req.body.carousel,
+			status: "Scheduled"
 		});
 		await newFlight.save();
 		res.redirect(`/${props.url}`);
@@ -57,12 +89,24 @@ router.get("/edit/:_id", async (req, res, next) => {
 router.post("/edit/:_id", async (req, res, next) => {
 	try {
 		let flightId = req.params._id;
+		let airline = await Airline.findOne({ name: req.body.airline });
+		let originAirport = await Airport.findOne({ iata: req.body.originAirport.substring(0, 3) });
+		let destinationAirport = await Airport.findOne({ iata: req.body.destinationAirport.substring(0, 3) });
 		await Flight.findByIdAndUpdate(
 			flightId,
 			{
-				name: req.body.name,
-				iata: req.body.iata,
-				icao: req.body.icao
+				airline: req.body.airline,
+				flightNumber: `${airline.iata}${req.body.flightNumber}`,
+				movementType: req.body.type,
+				originAirport: originAirport.iata,
+				originCity: originAirport.city,
+				destinationAirport: destinationAirport.iata,
+				destinationCity: destinationAirport.city,
+				departureTime: new Date(req.body.departureTime),
+				arrivalTime: new Date(req.body.arrivalTime),
+				gate: req.body.gate,
+				carousel: req.body.carousel,
+				status: req.body.status
 			}
 		);
 		res.redirect(`/${props.url}`);
