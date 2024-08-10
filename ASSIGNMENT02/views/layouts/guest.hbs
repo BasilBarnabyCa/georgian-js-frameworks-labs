@@ -25,36 +25,48 @@
 	<header class="bg-white shadow-lg">
 		<div class="container mx-auto flex justify-between items-center p-4">
 			<a href="#" class="text-2xl font-bold text-blue-600">FlightDeck</a>
-			<div class="flex space-x-4">
+			<nav class="flex space-x-4">
 				<nav class="hidden md:flex space-x-8 items-center">
-
 					<a href="/airlines-demo" class="text-gray-700 hover:text-blue-600">Collections Demo</a>
-					<a href="https://github.com/BasilBarnabyCa/COMP2068JSFrameworks" target="_blank"
-						class="text-gray-700 hover:text-blue-600">GitHub Repo</a>
 				</nav>
 				{{#if user}}
-				<p>Welcome back, {{user.name}}.</p>
-				<a href="/logout"
-					class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
-					Logout</a>
+				<nav class="hidden md:flex space-x-8 items-center">
+					<p>Welcome back, {{user.name}}.</p>
+					{{#if (eq user.role "Admin")}}
+					<a href="/admin/dashboard"
+						class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-purple-700 to-pink-500 hover:shadow-soft-2xl hover:scale-102">
+						Dashboard</a>
+					{{/if}}
+					{{#if (eq user.role "Subscriber")}}
+					<a href="/flights"
+						class="px-6 py-3 font-bold text-white uppercase transition-all ease-in border-0 rounded-lg bg-gradient-to-tl from-purple-700 to-pink-500 hover:shadow-soft-2xl hover:scale-102">View
+						Flights</a>
+					{{/if}}
+					<a href="/logout"
+						class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
+						Logout</a>
+				</nav>
 				{{else}}
-				<a href="/login"
-					class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
-					Login</a>
-				<a href="/github"
-					class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
-					Login with GitHub</a>
-				<a href="/sign-up"
-					class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
-					Sign up</a>
+				<nav class="hidden md:flex space-x-8 items-center">
+					<a href="/login"
+						class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
+						Login</a>
+					<a href="/github"
+						class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
+						Login with GitHub</a>
+					<a href="/sign-up"
+						class="px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro text-xs bg-gradient-to-tl from-blue-600 to-cyan-400 hover:shadow-soft-2xl hover:scale-102">
+						Sign up</a>
+				</nav>
 				{{/if}}
-			</div>
-			<!-- Mobile Menu Button -->
-			<div class="md:hidden flex items-center">
-				<button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
-					<i class="fa fa-bars fa-2x"></i>
-				</button>
-			</div>
+			</nav>
+		</div>
+		<!-- Mobile Menu Button -->
+		<div class="md:hidden flex items-center">
+			<button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+				<i class="fa fa-bars fa-2x"></i>
+			</button>
+		</div>
 		</div>
 		<!-- Mobile Menu -->
 		{{!-- <div id="mobile-menu" class="hidden md:hidden">
