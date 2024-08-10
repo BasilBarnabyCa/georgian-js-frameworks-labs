@@ -37,22 +37,31 @@ The application integrates Nodemailer to handle email notifications, providing u
 - **User Registration Confirmation**: Sends a welcome email to users upon successful registration.
 
 **Usage:**
-1. **Set Up SMTP Configuration**: Configure the SMTP settings in your environment variables for email delivery.
-2. **Trigger Emails**: Emails are automatically triggered upon specific actions like user registration or flight updates.
 
-### OpenAI Integration
+1. **Set Up SMTP Configuration**:
+   - **Environment Variables**: Configure the SMTP settings in your `.env` file for email delivery.
+   - Add the following lines to your `.env` file:
+     ```plaintext
+     GMAIL_USER=your-email@gmail.com
+     GMAIL_PASS=your-google-app-password
+     ```
+     - **GMAIL_USER**: Replace `your-email@gmail.com` with the Gmail address you want to use to send emails.
+     - **GMAIL_PASS**: Replace `your-google-app-password` with the App Password generated in your Google account. This is required instead of your usual Gmail password for security reasons.
 
-**Key Features:**
-- **Flight Information Queries**: Users can ask natural language questions about flights, and the application will respond with accurate information.
-- **Personalized Travel Suggestions**: Provides users with recommendations based on their travel history and preferences.
+2. **Trigger Emails**:
+   - Emails are automatically triggered upon specific actions like user registration or flight updates. For example, when a user successfully registers, they receive a confirmation email sent from the configured Gmail account.
 
-**Usage:**
-1. **Set Up API Key**: Obtain an API key from OpenAI and configure it in your environment variables.
-2. **Implement Queries**: Use the OpenAI API to handle specific queries and interactions within the application.
-3. **Customize Responses**: Tailor the AI responses to match the tone and requirements of your application.
+---
 
-**Description:**
-The application leverages the OpenAI API to provide advanced features such as natural language processing and personalized recommendations. This enhances the user experience by providing more intuitive and intelligent interactions.
+### How to Generate a Google App Password:
+
+1. **Go to Google Account Security Settings**: Navigate to [Google Account Security](https://myaccount.google.com/security) and log in if necessary.
+2. **Enable 2-Step Verification**: Ensure that 2-Step Verification is enabled on your account.
+3. **Generate App Password**:
+   - Under the "Signing in to Google" section, click on **App passwords**.
+   - Select **Mail** as the app and choose **Other** as the device, then name it something like "Nodemailer".
+   - Click **Generate** to get your App Password. Copy this password and use it in the `GMAIL_PASS` field in your `.env` file.
+
 
 ## Installation
 1. **Clone the Repository**		
